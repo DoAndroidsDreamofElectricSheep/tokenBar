@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TokenBar is a macOS menu bar app (macOS 14+) that monitors usage limits and quotas for 25+ AI coding platforms (Claude, Codex, Cursor, Gemini, Copilot, Augment, etc.). Built in Swift 6 with strict concurrency. Uses SwiftPM as build system.
+tokenBar is a macOS menu bar app (macOS 14+) that monitors usage limits and quotas for AI coding platforms. Built in Swift 6 with strict concurrency. Uses SwiftPM as build system.
 
-This is a fork of [steipete/TokenBar](https://github.com/steipete/TokenBar).
+Fork of [steipete/CodexBar](https://github.com/steipete/CodexBar), stripped down to 4 core providers: **Claude**, **Codex**, **Gemini**, **Antigravity**.
 
 ## Build, Test, Run
 
 ```bash
 swift build                        # Debug build
 swift build -c release             # Release build
-swift test                         # Full XCTest suite
+swift test                         # Full test suite (Swift Testing)
 swift test --filter TestClassName  # Single test class
-./Scripts/compile_and_run.sh       # Full dev loop: kill, build, test, package, relaunch
+./Scripts/compile_and_run.sh       # Full dev loop: kill, build, package, relaunch
 ./Scripts/package_app.sh           # Build TokenBar.app bundle
 ./Scripts/lint.sh lint             # Check linting
 ./Scripts/lint.sh format           # Auto-format
@@ -29,7 +29,6 @@ After any code change, run `./Scripts/compile_and_run.sh` to rebuild and restart
 SwiftFormat + SwiftLint enforced. Key rules:
 - 4-space indent, 120-char lines
 - Explicit `self` required (Swift 6 concurrency) -- do not remove
-- Run `swiftformat Sources Tests` and `swiftlint --strict`
 - Run `pnpm check` before handoff to catch all issues
 
 ## Architecture
@@ -40,19 +39,15 @@ SwiftFormat + SwiftLint enforced. Key rules:
 |--------|---------|
 | `TokenBar` | macOS app: AppKit/SwiftUI hybrid, menu bar UI, settings, icon renderer |
 | `TokenBarCore` | Shared logic: providers, usage fetching, config, logging, cookie/keychain handling |
-| `TokenBarCLI` | CLI executable (`tokenbar` command) |
-| `TokenBarWidget` | WidgetKit extension |
 | `TokenBarMacros` / `TokenBarMacroSupport` | Swift Syntax macros for provider registration |
-| `TokenBarClaudeWatchdog` | Helper: manages stable Claude CLI PTY sessions |
-| `TokenBarClaudeWebProbe` | Helper: diagnostics for Claude web fetches |
 
-### Provider Architecture (the core pattern)
+### Provider Architecture
 
 Every AI platform is a **provider** following a plugin pattern:
 
-1. **`UsageProvider` enum** (`Sources/TokenBarCore/Providers/Providers.swift`) -- add new providers here
+1. **`UsageProvider` enum** (`Sources/TokenBarCore/Providers/Providers.swift`) -- 4 cases: codex, claude, gemini, antigravity
 2. **Provider folder** (`Sources/TokenBarCore/Providers/<Name>/`) with a descriptor and fetch strategies
-3. **`ProviderDescriptor`** -- registry entry defining metadata, branding, token cost config, fetch plan, CLI config. Uses `@ProviderDescriptorRegistration` and `@ProviderDescriptorDefinition` macros for auto-registration.
+3. **`ProviderDescriptor`** -- registry entry defining metadata, branding, token cost config, fetch plan. Uses `@ProviderDescriptorRegistration` and `@ProviderDescriptorDefinition` macros for auto-registration.
 4. **Fetch strategies** -- implement `ProviderFetchStrategy` protocol. Types include OAuth, Web Cookies, CLI PTY, API Token, Local Probe. Strategies compose into a pipeline with fallback.
 
 ### Data Flow
@@ -81,7 +76,7 @@ UsageStore (refresh orchestration)
 
 ## Testing
 
-Tests live in `Tests/TokenBarTests/` (140+ files). Convention: `FeatureNameTests` class with `test_caseDescription` methods.
+Tests live in `Tests/TokenBarTests/`. Convention: `FeatureNameTests` class with `test_caseDescription` methods.
 
 ```bash
 swift test                                        # All tests
@@ -96,7 +91,6 @@ LIVE_TEST=1 swift test --filter LiveAccountTests  # Live tests (needs credential
 3. Define `NewProviderDescriptor.swift` with `@ProviderDescriptorRegistration` / `@ProviderDescriptorDefinition`
 4. Implement fetch strategies conforming to `ProviderFetchStrategy`
 5. Add tests in `Tests/TokenBarTests/`
-6. Document in `docs/newprovider.md`
 
 ## Important Conventions
 
@@ -105,14 +99,4 @@ LIVE_TEST=1 swift test --filter LiveAccountTests  # Live tests (needs credential
 - Do not add dependencies or tooling without confirmation.
 - Commit messages: short imperative clauses (e.g., "Improve usage probe", "Fix icon dimming").
 - Release script must run in foreground -- do not background it.
-
-## Fork Management
-
-This fork preserves providers that upstream removed (e.g., Augment). Multi-upstream scripts exist for selective syncing:
-
-```bash
-./Scripts/check_upstreams.sh upstream   # Monitor upstream changes
-./Scripts/review_upstream.sh upstream   # Deep-dive into upstream commits
-```
-
-See `docs/UPSTREAM_STRATEGY.md` for full multi-upstream workflow.
+- Internal identifiers use `com.steipete.tokenbar` (bundle ID, app group, keychain service).
