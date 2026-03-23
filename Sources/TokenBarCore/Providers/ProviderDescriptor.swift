@@ -57,6 +57,7 @@ public enum ProviderDescriptorRegistry {
         .claude: ClaudeProviderDescriptor.descriptor,
         .gemini: GeminiProviderDescriptor.descriptor,
         .antigravity: AntigravityProviderDescriptor.descriptor,
+        .trae: TraeProviderDescriptor.descriptor,
     ]
     private static let bootstrap: Void = {
         for provider in UsageProvider.allCases {

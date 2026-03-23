@@ -16,6 +16,7 @@ enum ProviderImplementationRegistry {
         case .claude: ClaudeProviderImplementation()
         case .gemini: GeminiProviderImplementation()
         case .antigravity: AntigravityProviderImplementation()
+        case .trae: TraeProviderImplementation()
         }
     }
 

@@ -31,6 +31,7 @@ public enum LogCategories {
     public static let terminal = "terminal"
     public static let tokenAccounts = "token-accounts"
     public static let tokenCost = "token-cost"
+    public static let trae = "trae"
     public static let ttyRunner = "tty-runner"
     public static let webkitTeardown = "webkit-teardown"
 }

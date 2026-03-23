@@ -7,6 +7,7 @@ public enum UsageProvider: String, CaseIterable, Sendable, Codable {
     case claude
     case gemini
     case antigravity
+    case trae
 }
 
 // swiftformat:enable sortDeclarations
@@ -16,6 +17,7 @@ public enum IconStyle: Sendable, CaseIterable {
     case claude
     case gemini
     case antigravity
+    case trae
     case combined
 }
 

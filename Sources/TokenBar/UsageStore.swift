@@ -1164,7 +1164,7 @@ extension UsageStore {
                             browserDetection: browserDetection,
                             configuration: claudeDebugConfiguration)
                     }
-                case .gemini, .antigravity:
+                case .gemini, .antigravity, .trae:
                     return "Debug log not yet implemented"
                 }
             }

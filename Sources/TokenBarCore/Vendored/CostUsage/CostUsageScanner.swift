@@ -63,7 +63,7 @@ enum CostUsageScanner {
             return self.loadCodexDaily(range: range, now: now, options: options)
         case .claude:
             return self.loadClaudeDaily(provider: .claude, range: range, now: now, options: options)
-        case .gemini, .antigravity:
+        case .gemini, .antigravity, .trae:
             return emptyReport
         }
     }

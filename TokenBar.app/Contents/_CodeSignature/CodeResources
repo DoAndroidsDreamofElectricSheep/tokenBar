@@ -196,6 +196,10 @@
 		<data>
 		6+g5CbLDMNdGGONsEQBaJ1fGlzg=
 		</data>
+		<key>Resources/ProviderIcon-trae.svg</key>
+		<data>
+		+GU1SbrcLTCsUlRDowib0dmDnb8=
+		</data>
 		<key>Resources/TokenBar_TokenBar.bundle/Icon-classic.icns</key>
 		<data>
 		JFOGTaHQxaiyMzcM3gAcZnIcXqU=
@@ -216,6 +220,10 @@
 		<data>
 		6+g5CbLDMNdGGONsEQBaJ1fGlzg=
 		</data>
+		<key>Resources/TokenBar_TokenBar.bundle/ProviderIcon-trae.svg</key>
+		<data>
+		+GU1SbrcLTCsUlRDowib0dmDnb8=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -232,10 +240,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			o4OzuZTAvfpFSynRtFg2AFuTUhQ=
+			KwiwUsBlgEY1ZpmgkIehYv1Yfsg=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"a383b3b994c0bdfa454b29d1b45836005b935214"</string>
+			<string>cdhash H"2b08b052c0658046356699a09087a162fd587ec8"</string>
 		</dict>
 		<key>Resources/CodexBar_CodexBar.bundle/Icon-classic.icns</key>
 		<dict>
@@ -465,6 +473,13 @@
 			xn5UxmMEH96/DOLz/5qOduGSjKuu5095NkUKAcGkCqU=
 			</data>
 		</dict>
+		<key>Resources/ProviderIcon-trae.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			r2AtC7qxuek1hZmVfueqBdfdljFSDW9VywsUcf7vw4c=
+			</data>
+		</dict>
 		<key>Resources/TokenBar_TokenBar.bundle/Icon-classic.icns</key>
 		<dict>
 			<key>hash2</key>
@@ -498,6 +513,13 @@
 			<key>hash2</key>
 			<data>
 			xn5UxmMEH96/DOLz/5qOduGSjKuu5095NkUKAcGkCqU=
+			</data>
+		</dict>
+		<key>Resources/TokenBar_TokenBar.bundle/ProviderIcon-trae.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			r2AtC7qxuek1hZmVfueqBdfdljFSDW9VywsUcf7vw4c=
 			</data>
 		</dict>
 	</dict>
